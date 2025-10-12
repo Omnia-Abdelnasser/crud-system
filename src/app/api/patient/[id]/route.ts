@@ -1,67 +1,77 @@
 /* eslint-disable */
 import Patient from "@/models/patients";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import connectToDatabase from "@/lib/db";
 
-// delete a patient
+//  DELETE patient
 export async function DELETE(
-  req: Request,
-  { params }: { params: { id: string } },
+  req: NextRequest,
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await context.params;
     await connectToDatabase();
 
-    const patient = await Patient.findByIdAndDelete(params.id);
+    const patient = await Patient.findByIdAndDelete(id);
     if (!patient) {
       return NextResponse.json({ error: "patient not found" }, { status: 404 });
     }
+
     return NextResponse.json(
       { message: "patient deleted successfully" },
-      { status: 200 },
+      { status: 200 }
     );
   } catch (error: any) {
     return NextResponse.json(
       { error: error.message || "server error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
 
-// update a patient
+//  UPDATE patient
 export async function PUT(
-  req: Request,
-  { params }: { params: { id: string } },
+  req: NextRequest,
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    await connectToDatabase();
+    const { id } = await context.params;
     const data = await req.json();
-    const patient = await Patient.findByIdAndUpdate(params.id, data, {
-      new: true,
-    });
+    await connectToDatabase();
+
+    const patient = await Patient.findByIdAndUpdate(id, data, { new: true });
     if (!patient) {
       return NextResponse.json({ error: "patient not found" }, { status: 404 });
     }
+
     return NextResponse.json(patient, { status: 200 });
   } catch (error: any) {
     return NextResponse.json(
       { error: error.message || "server error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
 
-// get  patient
+//  GET single patient
 export async function GET(
-  req: Request,
+  req: NextRequest,
   context: { params: Promise<{ id: string }> }
 ) {
-  const { id } = await context.params; 
-  await connectToDatabase();
+  try {
+    const { id } = await context.params;
+    await connectToDatabase();
 
-  const patient = await Patient.findById(id);
-  if (!patient) {
-    return NextResponse.json({ error: "Patient not found" }, { status: 404 });
+    const patient = await Patient.findById(id);
+    if (!patient) {
+      return NextResponse.json({ error: "patient not found" }, { status: 404 });
+    }
+
+    return NextResponse.json(patient, { status: 200 });
+  } catch (error: any) {
+    return NextResponse.json(
+      { error: error.message || "server error" },
+      { status: 500 }
+    );
   }
-
-  return NextResponse.json(patient, { status: 200 });
 }
