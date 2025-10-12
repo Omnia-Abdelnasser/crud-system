@@ -53,19 +53,15 @@ export async function PUT(
 // get  patient
 export async function GET(
   req: Request,
-  { params }: { params: { id: string } },
+  context: { params: Promise<{ id: string }> }
 ) {
-  try {
-    await connectToDatabase();
-    const patient = await Patient.findById(params.id);
-    if (!patient) {
-      return NextResponse.json({ error: "patient not found" }, { status: 404 });
-    }
-    return NextResponse.json(patient, { status: 201 });
-  } catch (error: any) {
-    return NextResponse.json(
-      { error: error.message || "server error" },
-      { status: 500 },
-    );
+  const { id } = await context.params; 
+  await connectToDatabase();
+
+  const patient = await Patient.findById(id);
+  if (!patient) {
+    return NextResponse.json({ error: "Patient not found" }, { status: 404 });
   }
+
+  return NextResponse.json(patient, { status: 200 });
 }
