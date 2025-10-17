@@ -1,13 +1,19 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
 export function middleware(req: NextRequest) {
-  console.log("Middleware triggered on:", req.nextUrl.pathname);
-  const token = req.cookies.get("token")?.value;
+  const token = req.cookies.get("token");
 
-  if (!token && req.nextUrl.pathname.startsWith("/dashboard")) {
-    console.log(" No token, redirecting...");
+  if (!token && req.nextUrl.pathname !== "/login") {
     return NextResponse.redirect(new URL("/login", req.url));
+  }
+
+  if (token && req.nextUrl.pathname === "/login") {
+    return NextResponse.redirect(new URL("/craud", req.url));
   }
 
   return NextResponse.next();
 }
+export const config = {
+  matcher: ["/craud/:path*"],
+};

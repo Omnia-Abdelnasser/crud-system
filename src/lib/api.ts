@@ -48,6 +48,11 @@ export const Login = async (values: { email: string; password: string }) => {
   }
 };
 
+//logout
+export const logout = async () => {
+  await fetch("/api/logout", { method: "POST" });
+};
+
 // patient api
 
 //get all patients

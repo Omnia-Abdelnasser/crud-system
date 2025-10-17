@@ -17,6 +17,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import z from "zod";
 
 export default function LoginPage() {
@@ -36,7 +37,7 @@ export default function LoginPage() {
       const res = await Login(values);
       console.log("Login response:", res);
       form.reset();
-      alert("Login successful!");
+      toast.success("login successfully");
       router.push("/craud");
     } catch (error) {
       console.error("Login failed:", error);

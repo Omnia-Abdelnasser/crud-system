@@ -16,6 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import z from "zod";
 
 export default function RegisterPage() {
@@ -33,7 +34,7 @@ export default function RegisterPage() {
   const onSubmit = async (values: z.infer<typeof registerSchema>) => {
     try {
       await Register(values);
-      alert("Registration successful! Please log in.");
+      toast.success("Registration successful! Please log in.");
       form.reset();
       router.push("/login");
     } catch (error) {

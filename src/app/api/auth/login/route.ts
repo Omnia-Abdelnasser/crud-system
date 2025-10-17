@@ -4,7 +4,6 @@ import User from "@/models/user";
 import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
-import Cookies from "js-cookie";
 
 export async function POST(req: Request) {
   try {

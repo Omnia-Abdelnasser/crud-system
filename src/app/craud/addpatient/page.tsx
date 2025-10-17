@@ -36,12 +36,12 @@ const AddPatientPage = () => {
     try {
       addPatient.mutate(values, {
         onSuccess: () => {
-          toast.success("Patient updated successfully!");
+          toast.success("Patient added successfully!");
           form.reset();
           router.push("/craud");
         },
         onError: () => {
-          toast.error("Failed to update patient. Please try again.");
+          toast.error("Failed to add patient. Please try again.");
         },
       });
     } catch (error) {

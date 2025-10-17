@@ -6,7 +6,7 @@ import connectToDatabase from "@/lib/db";
 //  DELETE patient
 export async function DELETE(
   req: NextRequest,
-  context: { params: Promise<{ id: string }> }
+  context: { params: Promise<{ id: string }> },
 ) {
   try {
     const { id } = await context.params;
@@ -19,12 +19,12 @@ export async function DELETE(
 
     return NextResponse.json(
       { message: "patient deleted successfully" },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error: any) {
     return NextResponse.json(
       { error: error.message || "server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -32,7 +32,7 @@ export async function DELETE(
 //  UPDATE patient
 export async function PUT(
   req: NextRequest,
-  context: { params: Promise<{ id: string }> }
+  context: { params: Promise<{ id: string }> },
 ) {
   try {
     const { id } = await context.params;
@@ -48,7 +48,7 @@ export async function PUT(
   } catch (error: any) {
     return NextResponse.json(
       { error: error.message || "server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -56,7 +56,7 @@ export async function PUT(
 //  GET single patient
 export async function GET(
   req: NextRequest,
-  context: { params: Promise<{ id: string }> }
+  context: { params: Promise<{ id: string }> },
 ) {
   try {
     const { id } = await context.params;
@@ -71,7 +71,7 @@ export async function GET(
   } catch (error: any) {
     return NextResponse.json(
       { error: error.message || "server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
