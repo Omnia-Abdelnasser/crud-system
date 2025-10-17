@@ -45,5 +45,5 @@ integrated with a **Database (MongoDB)**, styled using **Tailwind CSS**, and man
 
 ---
 
-## 🗂️ Folder Structure
+
 
