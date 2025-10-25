@@ -20,6 +20,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import z from "zod";
 
+
 export default function LoginPage() {
   const router = useRouter();
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -63,7 +64,7 @@ export default function LoginPage() {
                   <FormControl>
                     <Input
                       type="email"
-                      placeholder="your_email@example.com"
+                      placeholder="enter your email"
                       {...field}
                     />
                   </FormControl>

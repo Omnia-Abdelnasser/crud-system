@@ -60,7 +60,7 @@ export default function RegisterPage() {
                 <FormItem>
                   <FormLabel>Username</FormLabel>
                   <FormControl>
-                    <Input placeholder="your_username" {...field} />
+                    <Input placeholder="enter your name" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -77,7 +77,7 @@ export default function RegisterPage() {
                   <FormControl>
                     <Input
                       type="email"
-                      placeholder="your_email@example.com"
+                      placeholder="enter your email"
                       {...field}
                     />
                   </FormControl>
