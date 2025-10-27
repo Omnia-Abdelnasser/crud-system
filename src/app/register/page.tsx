@@ -34,7 +34,12 @@ export default function RegisterPage() {
   const onSubmit = async (values: z.infer<typeof registerSchema>) => {
     try {
       await Register(values);
-      toast.success("Registration successful! Please log in.");
+      toast.success("Registration successful! Please log in.",{
+        style: {
+          backgroundColor: "#22c55e",
+          color: "#fff",
+        },
+      });
       form.reset();
       router.push("/login");
     } catch (error) {

@@ -36,7 +36,12 @@ const AddPatientPage = () => {
     try {
       addPatient.mutate(values, {
         onSuccess: () => {
-          toast.success("Patient added successfully!");
+          toast.success("Patient added successfully!",{
+            style: {
+               backgroundColor: "#22c55e", 
+               color: "#fff",
+            },
+          });
           form.reset();
           router.push("/craud");
         },

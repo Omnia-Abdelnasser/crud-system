@@ -37,7 +37,12 @@ export default function LoginPage() {
       const res = await Login(values);
       console.log("Login response:", res);
       form.reset();
-      toast.success("Login successful!");
+     toast.success("Login successful!", {
+  style: {
+    backgroundColor: "#22c55e", 
+    color: "#fff",
+  },
+});
       router.push("/craud");
     } catch (error) {
       console.error("Login failed:", error);

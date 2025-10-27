@@ -49,7 +49,12 @@ const UpdatePatientPage = () => {
         { id: id as string, values },
         {
           onSuccess: () => {
-            toast.success("Patient updated successfully!");
+            toast.success("Patient updated successfully!",{
+              style: {
+                 backgroundColor: "#22c55e", 
+                 color: "#fff",
+              },
+            });
             form.reset();
             router.push("/craud");
           },
