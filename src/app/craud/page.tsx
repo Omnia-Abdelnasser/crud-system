@@ -20,7 +20,7 @@ const PatientTable = () => {
   // handle logout
   const handleLogout = async () => {
     await logout();
-    router.push("/");
+    router.push("/login");
   };
 
   if (isLoading)
@@ -36,8 +36,8 @@ const PatientTable = () => {
         ⚠️ Failed to load patients
       </p>
     );
-    const filterPatients = patients.filter((patient: any) =>
-    patient.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const filterPatients = patients.filter((patient: any) =>
+    patient.name.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   return (
@@ -46,7 +46,6 @@ const PatientTable = () => {
         <h2 className="text-3xl font-semibold text-gray-800 tracking-tight">
           Patients Management
         </h2>
-      
 
         <div className="flex items-center gap-4">
           <Button

@@ -5,7 +5,7 @@ import { queryClient } from "@/lib/reactquery";
 import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
- title: "crud system",
+  title: "crud system",
   description: "A simple crud system built with Next.js and React Query",
 };
 
