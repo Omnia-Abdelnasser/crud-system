@@ -7,9 +7,13 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { logout } from "@/lib/api";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
 
 const PatientTable = () => {
+  const [searchTerm, setSearchTerm] = useState("");
   const router = useRouter();
+  //cache patients data
   const { data: patients, isLoading, error } = usePatients();
   const deletePatient = useDeletePatient();
 
@@ -32,6 +36,9 @@ const PatientTable = () => {
         ⚠️ Failed to load patients
       </p>
     );
+    const filterPatients = patients.filter((patient: any) =>
+    patient.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="w-full min-h-screen bg-gray-50 p-6">
@@ -39,6 +46,7 @@ const PatientTable = () => {
         <h2 className="text-3xl font-semibold text-gray-800 tracking-tight">
           Patients Management
         </h2>
+      
 
         <div className="flex items-center gap-4">
           <Button
@@ -56,9 +64,17 @@ const PatientTable = () => {
           </Button>
         </div>
       </div>
-
+      <div className=" text-center mb-5">
+        <Input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search patients..."
+          className="border border-gray-300 rounded-lg px-4 py-2 w-1/3"
+        />
+      </div>
       <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
-        <table className="min-w-full text-sm text-left">
+        <table className="min-w-full text-md text-left">
           <thead className="bg-gray-100 text-gray-700 uppercase text-sm font-semibold">
             <tr>
               <th className="py-3 px-6">#</th>
@@ -71,7 +87,7 @@ const PatientTable = () => {
           </thead>
 
           <tbody className="divide-y divide-gray-200">
-            {patients?.map((patient: any, index: number) => (
+            {filterPatients?.map((patient: any, index: number) => (
               <tr
                 key={index}
                 className="hover:bg-gray-50 transition-colors duration-150"
@@ -108,7 +124,7 @@ const PatientTable = () => {
               </tr>
             ))}
 
-            {patients?.length === 0 && (
+            {filterPatients?.length === 0 && (
               <tr>
                 <td
                   colSpan={6}

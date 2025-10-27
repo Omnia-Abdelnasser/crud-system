@@ -53,7 +53,7 @@ export async function PUT(
   }
 }
 
-//  GET single patient
+// GET single patient
 export async function GET(
   req: NextRequest,
   context: { params: Promise<{ id: string }> },
