@@ -13,7 +13,7 @@ import { useState } from "react";
 const PatientTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const router = useRouter();
-  //cache patients data
+
   const { data: patients, isLoading, error } = usePatients();
   const deletePatient = useDeletePatient();
 
@@ -36,52 +36,58 @@ const PatientTable = () => {
         ⚠️ Failed to load patients
       </p>
     );
+
   const filterPatients = patients.filter((patient: any) =>
     patient.name.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   return (
-    <div className="w-full min-h-screen bg-gray-50 p-6">
-      <div className="flex justify-between items-center mb-8">
-        <h2 className="text-3xl font-semibold text-gray-800 tracking-tight">
+    <div className="w-full min-h-screen bg-gray-50 p-4 sm:p-6">
+
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800 tracking-tight">
           Patients Management
         </h2>
 
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
           <Button
             onClick={() => router.push("/craud/addpatient")}
-            className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-xl shadow-sm transition"
+            className="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-xl shadow-sm transition w-full sm:w-auto"
           >
             <Plus size={18} /> Add Patient
           </Button>
 
           <Button
             onClick={handleLogout}
-            className="flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-xl shadow-sm transition"
+            className="flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl shadow-sm transition w-full sm:w-auto"
           >
             <LogOut size={18} /> Logout
           </Button>
         </div>
       </div>
-      <div className=" text-center mb-5">
+
+      
+      <div className="flex justify-center mb-5">
         <Input
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search patients..."
-          className="border border-gray-300 rounded-lg px-4 py-2 w-1/3"
+          className="border border-gray-300 rounded-lg px-4 py-2 w-full sm:w-1/2 md:w-1/3"
         />
       </div>
-      <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
-        <table className="min-w-full text-md text-left">
-          <thead className="bg-gray-100 text-gray-700 uppercase text-sm font-semibold">
+
+      
+      <div className="bg-white rounded-2xl shadow-md overflow-x-auto border border-gray-200">
+        <table className="min-w-full text-sm sm:text-md text-left">
+          <thead className="bg-gray-100 text-gray-700 uppercase font-semibold">
             <tr>
-              <th className="py-3 px-6">#</th>
-              <th className="py-3 px-6">Name</th>
-              <th className="py-3 px-6">Email</th>
-              <th className="py-3 px-6">Age</th>
-              <th className="py-3 px-6">Doctor</th>
-              <th className="py-3 px-6 text-center">Actions</th>
+              <th className="py-3 px-4 sm:px-6">#</th>
+              <th className="py-3 px-4 sm:px-6">Name</th>
+              <th className="py-3 px-4 sm:px-6">Email</th>
+              <th className="py-3 px-4 sm:px-6">Age</th>
+              <th className="py-3 px-4 sm:px-6">Doctor</th>
+              <th className="py-3 px-4 sm:px-6 text-center">Actions</th>
             </tr>
           </thead>
 
@@ -91,14 +97,20 @@ const PatientTable = () => {
                 key={index}
                 className="hover:bg-gray-50 transition-colors duration-150"
               >
-                <td className="py-4 px-6">{index + 1}</td>
-                <td className="py-4 px-6 font-medium text-gray-800">
+                <td className="py-3 px-4 sm:px-6">{index + 1}</td>
+                <td className="py-3 px-4 sm:px-6 font-medium text-gray-800">
                   {patient.name}
                 </td>
-                <td className="py-4 px-6 text-gray-600">{patient.email}</td>
-                <td className="py-4 px-6 text-gray-600">{patient.age}</td>
-                <td className="py-4 px-6 text-gray-600">{patient.doctor}</td>
-                <td className="py-4 px-6 text-center space-x-4">
+                <td className="py-3 px-4 sm:px-6 text-gray-600">
+                  {patient.email}
+                </td>
+                <td className="py-3 px-4 sm:px-6 text-gray-600">
+                  {patient.age}
+                </td>
+                <td className="py-3 px-4 sm:px-6 text-gray-600">
+                  {patient.doctor}
+                </td>
+                <td className="py-3 px-4 sm:px-6 text-center space-x-3">
                   <button
                     onClick={() =>
                       router.push(`/craud/updatepatient/${patient._id}`)

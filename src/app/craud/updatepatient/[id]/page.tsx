@@ -70,7 +70,7 @@ const UpdatePatientPage = () => {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
-      <div className="min-w-6xl rounded-2xl bg-white p-8 shadow-lg">
+      <div className="w-full max-w-md sm:max-w-lg md:max-w-2xl rounded-2xl bg-white p-6 sm:p-8 shadow-lg">
         <h2 className="mb-6 text-center text-2xl font-bold text-gray-800">
           Update Patient
         </h2>
